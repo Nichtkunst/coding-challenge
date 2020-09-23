@@ -4,18 +4,18 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 // @ts-ignore
 import { Button, Text } from "rebass";
 
-import { storeContext } from "../store";
-import { IStudent } from "../interfaces/IStudent";
+import { useStore } from "../store";
+import { TStudent } from "../TStudent";
 import StudentModal from "./StudentModal";
 import { calculateAge } from "../helpers/ageHelper";
 
 type RowStudentTableProps = {
-  student: IStudent;
+  student: TStudent;
 };
 
 // finally I get it
 const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
-  const store = React.useContext(storeContext);
+  const store = useStore();
   const [toggle, setToggle] = React.useState<boolean>(false);
 
   return useObserver(() => (

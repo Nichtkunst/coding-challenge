@@ -1,19 +1,19 @@
 import * as React from "react";
-import { StudentModel } from "../interfaces/StudentModel";
+import { useObserver } from "mobx-react";
 
 import RowStudentTable from "./RowStudentTable";
 
+import { useStore } from "../store";
+import { TStudent } from "../TStudent";
+
 // responsive HTML table
 
-type StudentTableProps = {
-  studentList: StudentModel[];
-};
+type StudentTableProps = {};
 
-const StudentTable: React.FC<StudentTableProps> = ({ studentList }) => {
-  // logged mobX
-  console.log("studentList", studentList);
+const StudentTable: React.FC<StudentTableProps> = () => {
+  const store = useStore();
 
-  return (
+  return useObserver(() => (
     <table>
       <thead>
         <tr>
@@ -24,12 +24,14 @@ const StudentTable: React.FC<StudentTableProps> = ({ studentList }) => {
         </tr>
       </thead>
       <tbody>
-        {studentList.map((student, index) => (
-          <RowStudentTable key={index} student={student} />
-        ))}
+        {store.students
+          ? store.studentList.map((student: TStudent) => (
+              <RowStudentTable key={student.id} student={student} />
+            ))
+          : null}
       </tbody>
     </table>
-  );
+  ));
 };
 
 export default StudentTable;

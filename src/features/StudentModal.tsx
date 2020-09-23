@@ -8,13 +8,12 @@ import { Flex, Box, Button } from "rebass";
 import { Label, Input, Select } from "@rebass/forms";
 
 import Modal from "../components/Modal";
-import { storeContext } from "../store";
+import { useStore } from "../store";
 import { calculateAge } from "../helpers/ageHelper";
-import { IKlasse } from "../interfaces/IKlasse";
-import { IStudent } from "../interfaces/IStudent";
+import { TKlasse, TStudent } from "../TStudent";
 
 type StudentModalProps = {
-  student?: IStudent;
+  student?: TStudent;
   toggle: boolean;
   setToggle: (t: boolean) => void;
 };
@@ -24,7 +23,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
   toggle,
   setToggle
 }) => {
-  const store = React.useContext(storeContext);
+  const store = useStore();
   const [name, setName] = React.useState<string>(student?.name || "");
   const [birthdate, setBirthdate] = React.useState<Moment | string>(
     moment(student?.birthdate).format("YYYY-MM-DD") || ""
@@ -42,11 +41,11 @@ const StudentModal: React.FC<StudentModalProps> = ({
         onSubmit={(e) => {
           const formattedDate = moment(birthdate).format("DD.MM.YYYY");
           console.log("date", formattedDate);
-          store.addStudent({
+          store.addStudentV({
             // fix it
             id: !student ? uuidv4() : student?.id,
             name,
-            birthdate: calculateAge(formattedDate),
+            birthdate: formattedDate,
             klasse
           });
           setName("");
@@ -91,7 +90,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
               name="klasse"
               placeholder="Klasse auswählen"
             >
-              {store.klasseList.map((i: IKlasse, index: number) => (
+              {store.klassen.map((i: TKlasse, index: number) => (
                 <option key={index}>{i.klasse}</option>
               ))}
             </Select>
