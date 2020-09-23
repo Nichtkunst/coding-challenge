@@ -3,7 +3,8 @@ import { useLocalStore } from "mobx-react";
 // @ts-ignore
 import { v4 as uuidv4 } from "uuid";
 
-import { mockedStudentList, mockedKlasseList } from "./mockedData";
+// mockedStudentList
+import { mockedKlasseList } from "./mockedData";
 import { TStudent } from "./TStudent";
 
 const createStore = () => {
@@ -11,7 +12,7 @@ const createStore = () => {
   return {
     toggle: Boolean,
     students: [] as TStudent[], // [] as TStudent[],
-    studentList: mockedStudentList, //mockedStudentList,
+    studentList: [] as TStudent[], //mockedStudentList,
     klassen: mockedKlasseList,
     addStudent(name: string, birthdate: any, klasse: string) {
       this.students.push({ id: uuidv4(), name, birthdate, klasse });
@@ -20,9 +21,9 @@ const createStore = () => {
       this.studentList.push(student);
     },
     deleteStudent(id: string) {
-      const newStudentList = this.studentList.filter((i) => i.id !== id);
-      console.log("studentList", newStudentList);
-      this.studentList = newStudentList;
+      const studentToDelete = this.studentList.filter((i) => i.id !== id);
+      console.log("studentList", studentToDelete);
+      this.studentList = studentToDelete;
     },
     setToggle() {
       return false;

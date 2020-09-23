@@ -10,16 +10,16 @@ import Students from "./features";
 
 // single MobX Store e.g. in order to create or edit a student ✅
 
-// Students can be filtered by: Name and Klasse
-// Students can be sorted by each field ASC and DESC
+// Students can be filtered by: Name and Klasse *TODO
+// Students can be sorted by each field ASC and DESC *TODO
 
-// flexbox table
+// flexbox table *TODO
 
 // portal === custom modal window pops up
 // *new student ✅
-// *edit a student
+// *edit a student (buggy)
 
-// *delete a student (inline via table)
+// *delete a student (inline via table) ✅
 
 export default function App() {
   return (
