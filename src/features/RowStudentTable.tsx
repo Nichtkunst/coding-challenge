@@ -1,17 +1,20 @@
 import * as React from "react";
-import { StudentModel } from "../interfaces/StudentModel";
+import { useObserver } from "mobx-react";
 // @ts-ignore
 import { Button } from "rebass";
 
-import { appState } from "../store";
+import { storeContext } from "../store";
+import { IStudent } from "../interfaces/IStudent";
 
 type RowStudentTableProps = {
-  student: StudentModel;
+  student: IStudent;
 };
 
 // finally I get it
 const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
-  return (
+  const store = React.useContext(storeContext);
+
+  return useObserver(() => (
     <tr>
       <td>{student.name}</td>
       <td>{student.birthdate}</td>
@@ -20,15 +23,15 @@ const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
         <Button
           variant="secondary"
           onClick={() => {
-            appState.deleteStudent(student.name);
-            console.log("student", student);
+            store.deleteStudent(student.id);
+            console.log("student", student.id);
           }}
         >
           Schüler löschen
         </Button>
       </td>
     </tr>
-  );
+  ));
 };
 
 export default RowStudentTable;
