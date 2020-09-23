@@ -1,13 +1,14 @@
 import * as React from "react";
-import { observer } from "mobx-react";
+import { AiOutlinePlus } from "react-icons/ai";
 // @ts-ignore
 import { Flex, Box, Button } from "rebass";
 
-import { appState } from "../store";
-import StudentModal from "./StudentModal";
 import StudentTable from "./StudentTable";
+import StudentModal from "./StudentModal";
 
-const Students = () => {
+type StudentsProps = {};
+
+const Students: React.FC<StudentsProps> = () => {
   const [toggle, setToggle] = React.useState<boolean>(false);
 
   return (
@@ -17,15 +18,15 @@ const Students = () => {
       <Flex>
         <Box mx="auto" />
         <Button onClick={() => setToggle(!toggle)}>
-          Neuen Schüler hinzufügen
+          <AiOutlinePlus /> Neuen Schüler hinzufügen
         </Button>
       </Flex>
 
-      <StudentTable studentList={appState.studententList} />
+      <StudentTable />
 
       {toggle && <StudentModal toggle={toggle} setToggle={setToggle} />}
     </div>
   );
 };
 
-export default observer(Students);
+export default Students;

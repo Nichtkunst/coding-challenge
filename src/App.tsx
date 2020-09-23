@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useObserver } from "mobx-react";
 import { ThemeProvider } from "emotion-theming";
 // @ts-ignore
 import theme from "@rebass/preset";

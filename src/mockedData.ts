@@ -1,5 +1,5 @@
+// @ts-ignore
 import { v4 as uuidv4 } from "uuid";
-import { calculateAge } from "./helpers/ageHelper";
 import { IStudent } from "./interfaces/IStudent";
 import { IKlasse } from "./interfaces/IKlasse";
 
@@ -19,19 +19,19 @@ const mockedStudentList: IStudent[] = [
   {
     id: uuidv4(),
     name: "Constantin Raabe",
-    birthdate: calculateAge("03.07.2008"),
+    birthdate: "03.07.2008",
     klasse: Klassen["1A"]
   },
   {
     id: uuidv4(),
     name: "Lauren Doe",
-    birthdate: calculateAge("03.01.2007"),
+    birthdate: "03.01.2007",
     klasse: Klassen["2A"]
   },
   {
     id: uuidv4(),
     name: "Dolores Sofie Schmiedinger",
-    birthdate: calculateAge("11.05.2006"),
+    birthdate: "11.05.2006",
     klasse: Klassen["2B"]
   }
 ];
