@@ -13,8 +13,10 @@ const StoreProvider = (props: { children: React.ReactNode }) => {
     addStudent: (student: IStudent) => {
       store.studentList.push(student);
     },
-    deleteStudent: (name: string) =>
-      store.studentList.filter((i) => i.name !== name)
+    deleteStudent: (id: string) => {
+      store.studentList.filter((i) => i.id !== id);
+      console.log("studentList", store.studentList);
+    }
   }));
 
   return (

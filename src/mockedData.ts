@@ -1,6 +1,6 @@
 import { calculateAge } from "./helpers/ageHelper";
 import { IStudent } from "./interfaces/IStudent";
-import { IKlasseList } from "./interfaces/IKlasseList";
+import { IKlasse } from "./interfaces/IKlasse";
 
 enum Klassen {
   "1A" = "1A",
@@ -35,7 +35,7 @@ const mockedStudentList: IStudent[] = [
   }
 ];
 
-const mockedKlasseList: IKlasseList[] = [
+const mockedKlasseList: IKlasse[] = [
   {
     klasse: Klassen["1A"]
   },
