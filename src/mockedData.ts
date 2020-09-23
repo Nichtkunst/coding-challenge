@@ -1,6 +1,6 @@
 import { calculateAge } from "./helpers/ageHelper";
-import { StudentModel } from "./interfaces/StudentModel";
-import { KlasseModel } from "./interfaces/KlasseModel";
+import { IStudent } from "./interfaces/IStudent";
+import { IKlasseList } from "./interfaces/IKlasseList";
 
 enum Klassen {
   "1A" = "1A",
@@ -14,25 +14,28 @@ enum Klassen {
 // Birthdate (age should be calculated and rendered),
 // Klasse (can be chosen with a Select)
 
-const mockedStudentList: StudentModel[] = [
+const mockedStudentList: IStudent[] = [
   {
+    id: "1",
     name: "Constantin Raabe",
     birthdate: calculateAge("03.07.2008"),
     klasse: Klassen["1A"]
   },
   {
+    id: "2",
     name: "Lauren Doe",
     birthdate: calculateAge("03.01.2007"),
     klasse: Klassen["2A"]
   },
   {
+    id: "3",
     name: "Dolores Sofie Schmiedinger",
     birthdate: calculateAge("11.05.2006"),
     klasse: Klassen["2B"]
   }
 ];
 
-const mockedKlasseList: KlasseModel[] = [
+const mockedKlasseList: IKlasseList[] = [
   {
     klasse: Klassen["1A"]
   },

@@ -1,7 +1,12 @@
 import * as React from "react";
+import { useObserver } from "mobx-react";
 import { ThemeProvider } from "emotion-theming";
+// @ts-ignore
 import theme from "@rebass/preset";
 import "./styles.css";
+
+import { IStudent } from "./interfaces/IStudent";
+import { storeContext, StoreProvider } from "./store";
 
 import Students from "./features";
 
@@ -18,10 +23,27 @@ import Students from "./features";
 
 // *delete a student (inline via table)
 
+const StudentList = () => {
+  const store = React.useContext(storeContext);
+
+  return useObserver(() => (
+    <ul>
+      {store.studentList.map((i: IStudent) => (
+        <li key={i.id}>
+          {i.name} {i.birthdate} {i.klasse}{" "}
+          <button onClick={(e) => store.deleteStudent(i.name)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+  ));
+};
+
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Students />
-    </ThemeProvider>
+    <StoreProvider>
+      <ThemeProvider theme={theme}>
+        <Students />
+      </ThemeProvider>
+    </StoreProvider>
   );
 }
