@@ -9,7 +9,6 @@ import { Label, Input, Select } from "@rebass/forms";
 
 import Modal from "../components/Modal";
 import { useStore } from "../store";
-import { calculateAge } from "../helpers/ageHelper";
 import { TKlasse, TStudent } from "../TStudent";
 
 type StudentModalProps = {
@@ -30,17 +29,11 @@ const StudentModal: React.FC<StudentModalProps> = ({
   );
   const [klasse, setKlasse] = React.useState<string>(student?.klasse || "");
 
-  console.log(
-    "momentDateForInput",
-    moment(student?.birthdate).format("YYYY-MM-DD")
-  );
-
   return (
     <Modal>
       <form
         onSubmit={(e) => {
           const formattedDate = moment(birthdate).format("DD.MM.YYYY");
-          console.log("date", formattedDate);
           store.addStudentV({
             // fix it
             id: !student ? uuidv4() : student?.id,
