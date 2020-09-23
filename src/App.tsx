@@ -8,7 +8,7 @@ import { StoreProvider } from "./store";
 
 import Students from "./features";
 
-// single MobX Store e.g. in order to create or edit a student
+// single MobX Store e.g. in order to create or edit a student ✅
 
 // Students can be filtered by: Name and Klasse
 // Students can be sorted by each field ASC and DESC
@@ -16,7 +16,7 @@ import Students from "./features";
 // flexbox table
 
 // portal === custom modal window pops up
-// *new student
+// *new student ✅
 // *edit a student
 
 // *delete a student (inline via table)
