@@ -55,7 +55,7 @@ Generic Styling, for Desktops/Laptops
       margin: 0 0 1rem 0;
     }
 
-    tr:nth-child(odd) {
+    tr:nth-of-type(odd) {
       background: #ccc;
     }
 

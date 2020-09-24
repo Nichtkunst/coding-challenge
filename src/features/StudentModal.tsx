@@ -71,7 +71,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
         }}
       >
         <Flex flexDirection="column" p={16}>
-          <Box width={1 / 3} mb={3}>
+          <Box width={1} mb={3}>
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -83,7 +83,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
               placeholder="Vorname Nachname"
             />
           </Box>
-          <Box width={1 / 3} mb={3}>
+          <Box width={1} mb={3}>
             <Label htmlFor="birthdate">Geburtsdatum</Label>
             <Input
               id="birthdate"
@@ -96,7 +96,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
               placeholder="Geburtsdatum"
             />
           </Box>
-          <Box width={1 / 3}>
+          <Box width={1}>
             <Label htmlFor="klasse">Klasse</Label>
             <Select
               id="klasse"

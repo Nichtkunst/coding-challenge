@@ -6,6 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 // mockedStudentList
 import { mockedKlasseList } from "./mockedData";
 import { TStudent } from "./TStudent";
+import { calculateAge } from "./helpers/ageHelper";
+
+// Students can be filtered by: Name and Klasse *TODO
 
 const createStore = () => {
   // note the use of this which refers to observable instance of the store
@@ -27,6 +30,34 @@ const createStore = () => {
       this.studentList[studentIndex].name = student.name;
       this.studentList[studentIndex].birthdate = student.birthdate;
       this.studentList[studentIndex].klasse = student.klasse;
+    },
+    // abfsteigend
+    sortByAgeDesc() {
+      // @ts-ignore
+      this.studentList.replace(
+        this.studentList
+          .slice()
+          .sort((studentA: TStudent, studentB: TStudent) => {
+            return (
+              calculateAge(studentA.birthdate) -
+              calculateAge(studentB.birthdate)
+            );
+          })
+      );
+    },
+    // aufsteigend
+    sortByAgeAsc() {
+      // @ts-ignore
+      this.studentList.replace(
+        this.studentList
+          .slice()
+          .sort((studentA: TStudent, studentB: TStudent) => {
+            return (
+              calculateAge(studentB.birthdate) -
+              calculateAge(studentA.birthdate)
+            );
+          })
+      );
     },
     deleteStudent(id: number) {
       const studentToDelete = this.studentList.filter((i) => i.id !== id);
