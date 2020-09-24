@@ -11,7 +11,10 @@ import Students from "./features";
 
 // Name && Klasse ???
 // Students can be filtered by: Name and Klasse ✅
-// Students can be sorted by each field ASC and DESC ✅
+// Students can be sorted by each field ASC and DESC
+// * age ✅
+// * TODO: klasse
+// * TODO: name
 
 // flexbox table *TODO ✅ requirements ???
 // responsive table ✅
