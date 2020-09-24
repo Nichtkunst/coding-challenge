@@ -14,3 +14,9 @@ export type TKlasse = {
 export type TStudentList = {
   studentList: TStudent[];
 };
+
+export type TStudenFormModel = {
+  name: { value: string };
+  birthdate: { value: Moment | string };
+  klasse: { value: string };
+};

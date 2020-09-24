@@ -9,7 +9,7 @@ import { Label, Input, Select } from "@rebass/forms";
 
 import Modal from "../components/Modal";
 import { useStore } from "../store";
-import { TKlasse, TStudent } from "../TStudent";
+import { TKlasse, TStudent, TStudenFormModel } from "../TStudent";
 
 type StudentModalProps = {
   student?: TStudent;
@@ -64,8 +64,8 @@ const StudentModal: React.FC<StudentModalProps> = ({
 
   return (
     <Modal>
-      <form
-        onSubmit={(e) => {
+      <form<TStudenFormModel>
+        onSubmit={(e: React.SyntheticEvent) => {
           !student ? onSubmitAdd() : onSubmitEdit();
           e.preventDefault();
         }}
@@ -77,7 +77,9 @@ const StudentModal: React.FC<StudentModalProps> = ({
               id="name"
               name="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e: {
+                target: { value: React.SetStateAction<string> };
+              }) => setName(e.target.value)}
               placeholder="Vorname Nachname"
             />
           </Box>
@@ -86,8 +88,10 @@ const StudentModal: React.FC<StudentModalProps> = ({
             <Input
               id="birthdate"
               name="birthdate"
-              value={moment(student?.birthdate).format("YYYY-MM-DD")}
-              onChange={(e) => setBirthdate(e.target.value)}
+              value={moment(birthdate).format("YYYY-MM-DD")}
+              onChange={(e: {
+                target: { value: React.SetStateAction<string | moment.Moment> };
+              }) => setBirthdate(e.target.value)}
               type="date"
               placeholder="Geburtsdatum"
             />
@@ -97,7 +101,9 @@ const StudentModal: React.FC<StudentModalProps> = ({
             <Select
               id="klasse"
               value={klasse}
-              onChange={(e) => setKlasse(e.target.value)}
+              onChange={(e: {
+                target: { value: React.SetStateAction<string> };
+              }) => setKlasse(e.target.value)}
               name="klasse"
               placeholder="Klasse auswählen"
             >
