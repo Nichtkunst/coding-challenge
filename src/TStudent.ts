@@ -1,9 +1,9 @@
 import { Moment } from "moment";
 
 export type TStudent = {
-  id: number | string;
+  id: number;
   name: string;
-  birthdate: string | number | Moment;
+  birthdate: string | Moment;
   klasse: string;
 };
 

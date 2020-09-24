@@ -14,15 +14,23 @@ const createStore = () => {
     students: [] as TStudent[], // [] as TStudent[],
     studentList: [] as TStudent[], //mockedStudentList,
     klassen: mockedKlasseList,
-    addStudent(name: string, birthdate: any, klasse: string) {
+    addStudent(name: string, birthdate: string, klasse: string) {
       this.students.push({ id: uuidv4(), name, birthdate, klasse });
     },
     addStudentV(student: TStudent) {
       this.studentList.push(student);
     },
-    deleteStudent(id: string) {
+    editStudentV(student: TStudent) {
+      const studentIndex = this.studentList.findIndex(
+        (i) => i.id === student.id
+      );
+      this.studentList[studentIndex].name = student.name;
+      this.studentList[studentIndex].birthdate = student.birthdate;
+      this.studentList[studentIndex].klasse = student.klasse;
+    },
+    deleteStudent(id: number) {
       const studentToDelete = this.studentList.filter((i) => i.id !== id);
-      console.log("studentList", studentToDelete);
+      console.log("studentToDelete", studentToDelete);
       this.studentList = studentToDelete;
     },
     setToggle() {

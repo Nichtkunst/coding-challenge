@@ -12,10 +12,8 @@ const Students: React.FC<StudentsProps> = () => {
   const [toggle, setToggle] = React.useState<boolean>(false);
 
   return (
-    <div>
-      <Box height={16} />
-
-      <Flex>
+    <Box p={16}>
+      <Flex px={32}>
         <Box mx="auto" />
         <Button onClick={() => setToggle(!toggle)}>
           <AiOutlinePlus /> Neuen Schüler hinzufügen
@@ -25,7 +23,7 @@ const Students: React.FC<StudentsProps> = () => {
       <StudentTable />
 
       {toggle && <StudentModal toggle={toggle} setToggle={setToggle} />}
-    </div>
+    </Box>
   );
 };
 

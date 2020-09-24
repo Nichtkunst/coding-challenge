@@ -24,7 +24,7 @@ const StudentTable: React.FC<StudentTableProps> = () => {
         </tr>
       </thead>
       <tbody>
-        {store.students
+        {store.studentList
           ? store.studentList.map((student: TStudent) => (
               <RowStudentTable key={student.id} student={student} />
             ))

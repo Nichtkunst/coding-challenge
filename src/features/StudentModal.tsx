@@ -23,28 +23,50 @@ const StudentModal: React.FC<StudentModalProps> = ({
   setToggle
 }) => {
   const store = useStore();
+
+  console.log("student", student);
+
   const [name, setName] = React.useState<string>(student?.name || "");
   const [birthdate, setBirthdate] = React.useState<Moment | string>(
-    moment(student?.birthdate).format("YYYY-MM-DD") || ""
+    student?.birthdate || ""
   );
   const [klasse, setKlasse] = React.useState<string>(student?.klasse || "");
+
+  console.log("birthdate", birthdate);
+  console.log("formattedDate", moment(student?.birthdate).format("YYYY-MM-DD"));
+
+  const reset = () => {
+    setName("");
+    setBirthdate("");
+    setKlasse("");
+    setToggle(!toggle);
+  };
+
+  const onSubmitAdd = () => {
+    store.addStudentV({
+      id: uuidv4(),
+      name,
+      birthdate,
+      klasse
+    });
+    reset();
+  };
+
+  const onSubmitEdit = () => {
+    store.editStudentV({
+      id: student?.id!,
+      name,
+      birthdate,
+      klasse
+    });
+    reset();
+  };
 
   return (
     <Modal>
       <form
         onSubmit={(e) => {
-          const formattedDate = moment(birthdate).format("DD.MM.YYYY");
-          store.addStudentV({
-            // fix it
-            id: !student ? uuidv4() : student?.id,
-            name,
-            birthdate: formattedDate,
-            klasse
-          });
-          setName("");
-          setBirthdate("");
-          setKlasse("");
-          setToggle(!toggle);
+          !student ? onSubmitAdd() : onSubmitEdit();
           e.preventDefault();
         }}
       >
@@ -55,9 +77,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
               id="name"
               name="name"
               value={name}
-              onChange={(e: {
-                target: { value: React.SetStateAction<string> };
-              }) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Vorname Nachname"
             />
           </Box>
@@ -66,7 +86,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
             <Input
               id="birthdate"
               name="birthdate"
-              value={birthdate}
+              value={moment(student?.birthdate).format("YYYY-MM-DD")}
               onChange={(e) => setBirthdate(e.target.value)}
               type="date"
               placeholder="Geburtsdatum"
@@ -77,9 +97,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
             <Select
               id="klasse"
               value={klasse}
-              onChange={(e: {
-                target: { value: React.SetStateAction<string> };
-              }) => setKlasse(e.target.value)}
+              onChange={(e) => setKlasse(e.target.value)}
               name="klasse"
               placeholder="Klasse auswählen"
             >
