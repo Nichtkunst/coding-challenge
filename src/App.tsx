@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ThemeProvider } from "theme-ui";
-import { theme } from "./theme";
+import { theme as swiss } from "./theme";
 import "./styles.css";
 
 import { StoreProvider } from "./store";
@@ -9,10 +9,12 @@ import Students from "./features";
 
 // single MobX Store e.g. in order to create or edit a student ✅
 
-// Students can be filtered by: Name and Klasse *TODO
+// Name && Klasse ???
+// Students can be filtered by: Name and Klasse ✅
 // Students can be sorted by each field ASC and DESC ✅
 
-// flexbox table *TODO ✅
+// flexbox table *TODO ✅ requirements ???
+// responsive table ✅
 
 // portal === custom modal window pops up ✅
 // *new student ✅
@@ -23,7 +25,7 @@ import Students from "./features";
 export default function App() {
   return (
     <StoreProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={swiss}>
         <Students />
       </ThemeProvider>
     </StoreProvider>

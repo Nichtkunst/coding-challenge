@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useObserver } from "mobx-react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-// @ts-ignore
-import { Button, Text } from "rebass";
+import { Button, Text } from "theme-ui";
 
 import { useStore } from "../store";
 import { TStudent } from "../TStudent";
@@ -39,7 +38,7 @@ const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
             <AiOutlineDelete />
           </Button>
           <Button variant="secondary" onClick={() => setToggle(!toggle)}>
-            <AiOutlineEdit /> Schüler editieren
+            <AiOutlineEdit />
           </Button>
         </td>
       </tr>

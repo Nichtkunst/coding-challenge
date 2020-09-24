@@ -1,7 +1,4 @@
-// @ts-ignore
-import { v4 as uuidv4 } from "uuid";
-import { IStudent } from "./interfaces/IStudent";
-import { IKlasse } from "./interfaces/IKlasse";
+import { TKlasse } from "./TStudent";
 
 enum Klassen {
   "1A" = "1A",
@@ -10,33 +7,7 @@ enum Klassen {
   "2B" = "2B"
 }
 
-// Fields of a single Student:
-// Name,
-// Birthdate (age should be calculated and rendered),
-// Klasse (can be chosen with a Select)
-
-const mockedStudentList: IStudent[] = [
-  {
-    id: uuidv4(),
-    name: "Constantin Raabe",
-    birthdate: "03.07.2008",
-    klasse: Klassen["1A"]
-  },
-  {
-    id: uuidv4(),
-    name: "Lauren Doe",
-    birthdate: "03.01.2007",
-    klasse: Klassen["2A"]
-  },
-  {
-    id: uuidv4(),
-    name: "Dolores Sofie Schmiedinger",
-    birthdate: "11.05.2006",
-    klasse: Klassen["2B"]
-  }
-];
-
-const mockedKlasseList: IKlasse[] = [
+const mockedKlasseList: TKlasse[] = [
   {
     klasse: Klassen["1A"]
   },
@@ -51,4 +22,4 @@ const mockedKlasseList: IKlasse[] = [
   }
 ];
 
-export { mockedStudentList, mockedKlasseList };
+export { mockedKlasseList };

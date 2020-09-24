@@ -1,8 +1,9 @@
+/** @jsx jsx */
 import * as React from "react";
 import moment, { Moment } from "moment";
 // @ts-ignore
 import { v4 as uuidv4 } from "uuid";
-import { Flex, Box, Button, Label, Input, Select } from "theme-ui";
+import { Flex, Box, Button, Label, Input, Select, jsx } from "theme-ui";
 
 import Modal from "../components/Modal";
 import { useStore } from "../store";
@@ -20,8 +21,6 @@ const StudentModal: React.FC<StudentModalProps> = ({
   setToggle
 }) => {
   const store = useStore();
-
-  console.log("student", student);
 
   const [name, setName] = React.useState<string>(student?.name || "");
   const [birthdate, setBirthdate] = React.useState<Moment | string>(
@@ -64,8 +63,8 @@ const StudentModal: React.FC<StudentModalProps> = ({
           e.preventDefault();
         }}
       >
-        <Flex flexDirection="column" p={16}>
-          <Box width={1} mb={3}>
+        <Flex sx={{ flexDirection: "column" }} p={16}>
+          <Box sx={{ width: "320px", mb: 3 }}>
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -77,7 +76,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
               placeholder="Vorname Nachname"
             />
           </Box>
-          <Box width={1} mb={3}>
+          <Box sx={{ width: "320px", mb: 3 }}>
             <Label htmlFor="birthdate">Geburtsdatum</Label>
             <Input
               id="birthdate"
@@ -90,7 +89,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
               placeholder="Geburtsdatum"
             />
           </Box>
-          <Box width={1}>
+          <Box sx={{ width: "320px" }}>
             <Label htmlFor="klasse">Klasse</Label>
             <Select
               id="klasse"
@@ -101,14 +100,19 @@ const StudentModal: React.FC<StudentModalProps> = ({
               name="klasse"
               placeholder="Klasse auswählen"
             >
+              <option key="1" value="" disabled selected>
+                Bitte auswählen...
+              </option>
               {store.klassen.map((i: TKlasse, index: number) => (
-                <option key={index}>{i.klasse}</option>
+                <option key={index} value={i.klasse}>
+                  {i.klasse}
+                </option>
               ))}
             </Select>
           </Box>
-          <Box height={32} />
+          <Box sx={{ height: "32px" }} />
           <Flex>
-            <Button variant="outline" onClick={() => setToggle(!toggle)}>
+            <Button variant="secondary" onClick={() => setToggle(!toggle)}>
               Schließen
             </Button>
             <Box mx="auto" />

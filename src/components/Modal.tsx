@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import * as React from "react";
 import styled from "@emotion/styled";
-import { jsx } from "@emotion/core";
+import { jsx } from "theme-ui";
 // @ts-ignore
 import { Button } from "rebass";
 

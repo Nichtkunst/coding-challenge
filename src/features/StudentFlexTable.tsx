@@ -1,15 +1,19 @@
 import * as React from "react";
+import { Flex, Box } from "theme-ui";
 
 // normal table in case they wanna have it
 
 const StudentFlexTable = () => {
   return (
-    <div>
-      <div>Name</div>
-      <div>Alter</div>
-      <div>Klasse</div>
-      <div>Aktion</div>
-    </div>
+    <Box>
+      <Flex>
+        <Box>Name</Box>
+        <Box>Alter</Box>
+        <Box>Klasse</Box>
+        <Box>Aktion</Box>
+      </Flex>
+      <Flex></Flex>
+    </Box>
   );
 };
 

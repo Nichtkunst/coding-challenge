@@ -1,75 +1,74 @@
 import * as React from "react";
+import { observable } from "mobx";
 import { useLocalStore } from "mobx-react";
-// @ts-ignore
-import { v4 as uuidv4 } from "uuid";
 
 // mockedStudentList
 import { mockedKlasseList } from "./mockedData";
 import { TStudent } from "./TStudent";
 import { calculateAge } from "./helpers/ageHelper";
 
-// Students can be filtered by: Name and Klasse *TODO
-
 const createStore = () => {
   // note the use of this which refers to observable instance of the store
   return {
+    query: observable.box(""),
+    klasse: observable.box(""), // ?? hmm
     toggle: Boolean,
-    students: [] as TStudent[], // [] as TStudent[],
-    studentList: [] as TStudent[], //mockedStudentList,
+    students: [] as TStudent[], //mockedStudentList,
     klassen: mockedKlasseList,
-    addStudent(name: string, birthdate: string, klasse: string) {
-      this.students.push({ id: uuidv4(), name, birthdate, klasse });
-    },
     addStudentV(student: TStudent) {
-      this.studentList.push(student);
+      this.students.push(student);
     },
     editStudentV(student: TStudent) {
-      const studentIndex = this.studentList.findIndex(
-        (i) => i.id === student.id
+      const studentIndex = this.students.findIndex((i) => i.id === student.id);
+      this.students[studentIndex].name = student.name;
+      this.students[studentIndex].birthdate = student.birthdate;
+      this.students[studentIndex].klasse = student.klasse;
+    },
+    setQuery(query: string) {
+      this.query.set(query.toLowerCase());
+    },
+    setKlasse(klasse: string) {
+      this.klasse.set(klasse);
+    },
+    // 1 list for fitered items
+    // @ts-ignore
+    get filteredStudents() {
+      return this.students.filter(
+        (i: TStudent) =>
+          // @ts-ignore
+          i.name.toLowerCase().includes(this.query.get()) &&
+          i.klasse.includes(this.klasse.get())
       );
-      this.studentList[studentIndex].name = student.name;
-      this.studentList[studentIndex].birthdate = student.birthdate;
-      this.studentList[studentIndex].klasse = student.klasse;
     },
     // abfsteigend
     sortByAgeDesc() {
       // @ts-ignore
-      this.studentList.replace(
-        this.studentList
-          .slice()
-          .sort((studentA: TStudent, studentB: TStudent) => {
-            return (
-              calculateAge(studentA.birthdate) -
-              calculateAge(studentB.birthdate)
-            );
-          })
+      this.students.replace(
+        this.students.slice().sort((studentA: TStudent, studentB: TStudent) => {
+          return (
+            calculateAge(studentA.birthdate) - calculateAge(studentB.birthdate)
+          );
+        })
       );
     },
     // aufsteigend
     sortByAgeAsc() {
       // @ts-ignore
-      this.studentList.replace(
-        this.studentList
-          .slice()
-          .sort((studentA: TStudent, studentB: TStudent) => {
-            return (
-              calculateAge(studentB.birthdate) -
-              calculateAge(studentA.birthdate)
-            );
-          })
+      this.students.replace(
+        this.students.slice().sort((studentA: TStudent, studentB: TStudent) => {
+          return (
+            calculateAge(studentB.birthdate) - calculateAge(studentA.birthdate)
+          );
+        })
       );
     },
     deleteStudent(id: number) {
-      const studentToDelete = this.studentList.filter((i) => i.id !== id);
-      console.log("studentToDelete", studentToDelete);
-      this.studentList = studentToDelete;
+      const studentToDelete = this.students.filter((i) => i.id !== id);
+      this.students = studentToDelete;
     },
     setToggle() {
       return false;
     }
-    /* get singleStudent() {
-      return this.students.filter((i) => i.id);
-    }*/
   };
 };
 

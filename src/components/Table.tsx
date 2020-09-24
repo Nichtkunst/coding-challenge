@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import * as React from "react";
-import { jsx, css } from "@emotion/core";
+import { css } from "@emotion/core";
+import { jsx } from "theme-ui";
 import { useObserver } from "mobx-react";
 
 // responsive HTML table
