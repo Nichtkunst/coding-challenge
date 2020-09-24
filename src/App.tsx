@@ -15,9 +15,9 @@ import Students from "./features";
 
 // flexbox table *TODO
 
-// portal === custom modal window pops up
+// portal === custom modal window pops up *TODO: style
 // *new student ✅
-// *edit a student (buggy)
+// *edit a student ✅
 
 // *delete a student (inline via table) ✅
 

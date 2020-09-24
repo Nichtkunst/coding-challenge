@@ -1,33 +1,64 @@
+/** @jsx jsx */
 import * as React from "react";
-import ReactDOM from "react-dom";
+import styled from "@emotion/styled";
+import { jsx } from "@emotion/core";
+// @ts-ignore
+import { Button } from "rebass";
 
-// https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/portals/
-// https://codesandbox.io/s/3x4pmxwrw1?file=/src/index.js
+import Portal from "./Portal";
+
 // https://css-tricks.com/using-react-portals-to-render-children-outside-the-dom-hierarchy/
 
-// modalRoot in the DOM
-const modalRoot = document.getElementById("modal-root");
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-class Modal extends React.Component {
-  el: HTMLElement = document.createElement("div");
+const Card = styled.div`
+  position: relative;
+  background: white;
+  border-radius: 5px;
+  padding: 15px;
+  min-width: 320px;
+  z-index: 10;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 100px;
+`;
 
-  // phew TS
-  constructor(props: any) {
-    super(props);
-    this.el = document.createElement("div");
-  }
+type ModalProps = {
+  // using `interface` is also ok
+  setToggle: (b: boolean) => void;
+  toggle: boolean;
+  children: React.ReactChildren;
+};
 
-  // seems to be pretty weird ? nullable
-  componentDidMount() {
-    modalRoot?.appendChild(this.el);
-  }
-
-  componentWillUnmount() {
-    modalRoot?.removeChild(this.el);
-  }
-
+class Modal extends React.Component<ModalProps> {
   render() {
-    return ReactDOM.createPortal(this.props.children, this.el);
+    const { children, toggle, setToggle } = this.props;
+    return (
+      <Portal>
+        {toggle ? (
+          <Wrapper>
+            <Card>
+              <Button
+                onClick={setToggle}
+                variant="outline"
+                css={{ position: "absolute", top: "0", right: "0" }}
+              >
+                X
+              </Button>
+              <div>{children}</div>
+            </Card>
+          </Wrapper>
+        ) : null}
+      </Portal>
+    );
   }
 }
 
