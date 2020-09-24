@@ -1,7 +1,6 @@
 import * as React from "react";
-import { ThemeProvider } from "emotion-theming";
-// @ts-ignore
-import theme from "@rebass/preset";
+import { ThemeProvider } from "theme-ui";
+import { theme } from "./theme";
 import "./styles.css";
 
 import { StoreProvider } from "./store";

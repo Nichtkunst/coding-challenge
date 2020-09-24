@@ -2,10 +2,7 @@ import * as React from "react";
 import moment, { Moment } from "moment";
 // @ts-ignore
 import { v4 as uuidv4 } from "uuid";
-// @ts-ignore
-import { Flex, Box, Button } from "rebass";
-// @ts-ignore
-import { Label, Input, Select } from "@rebass/forms";
+import { Flex, Box, Button, Label, Input, Select } from "theme-ui";
 
 import Modal from "../components/Modal";
 import { useStore } from "../store";
@@ -31,9 +28,6 @@ const StudentModal: React.FC<StudentModalProps> = ({
     student?.birthdate || ""
   );
   const [klasse, setKlasse] = React.useState<string>(student?.klasse || "");
-
-  console.log("birthdate", birthdate);
-  console.log("formattedDate", moment(student?.birthdate).format("YYYY-MM-DD"));
 
   const reset = () => {
     setName("");
