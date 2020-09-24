@@ -24,7 +24,7 @@ const Card = styled.div`
   position: relative;
   background: white;
   border-radius: 5px;
-  padding: 15px;
+  padding: 16px;
   min-width: 320px;
   z-index: 10;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
@@ -35,7 +35,7 @@ type ModalProps = {
   // using `interface` is also ok
   setToggle: (b: boolean) => void;
   toggle: boolean;
-  children: React.ReactChildren;
+  children: React.ReactNode;
 };
 
 class Modal extends React.Component<ModalProps> {
@@ -47,7 +47,7 @@ class Modal extends React.Component<ModalProps> {
           <Wrapper>
             <Card>
               <Button
-                onClick={setToggle}
+                onClick={() => setToggle(!toggle)}
                 variant="outline"
                 css={{ position: "absolute", top: "0", right: "0" }}
               >

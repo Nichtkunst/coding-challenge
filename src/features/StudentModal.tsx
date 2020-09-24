@@ -63,7 +63,7 @@ const StudentModal: React.FC<StudentModalProps> = ({
   };
 
   return (
-    <Modal on={toggle} toggle={setToggle}>
+    <Modal toggle={toggle} setToggle={setToggle}>
       <form<TStudenFormModel>
         onSubmit={(e: React.SyntheticEvent) => {
           !student ? onSubmitAdd() : onSubmitEdit();

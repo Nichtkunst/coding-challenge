@@ -20,24 +20,21 @@ const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
 
   return useObserver(() => (
     <>
-      <tr>
-        <td>
+      <tr role="row">
+        <td role="cell">
           <Text>{student.name}</Text>
         </td>
-        <td>
+        <td role="cell">
           <Text>{calculateAge(student.birthdate)}</Text>
         </td>
-        <td>
+        <td role="cell">
           <Text>{student.klasse}</Text>
         </td>
-        <td>
+        <td role="cell">
           <Button
             mr={2}
             variant="secondary"
-            onClick={() => {
-              store.deleteStudent(student.id);
-              console.log("student", student.id);
-            }}
+            onClick={() => store.deleteStudent(student.id)}
           >
             <AiOutlineDelete />
           </Button>
