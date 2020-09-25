@@ -99,7 +99,10 @@ Generic Styling, for Desktops/Laptops
 `;
 
 type TableProps = {
-  titles: string[];
+  titles: {
+    id: string;
+    component: React.ReactNode;
+  }[];
   children: React.ReactNode;
 };
 
@@ -109,9 +112,9 @@ const Table: React.FC<TableProps> = ({ titles, children }) => {
     <table css={table} role="table">
       <thead role="rowgroup">
         <tr role="row">
-          {titles.map((i, index) => (
-            <th role="columnheader" key={index}>
-              {i}
+          {titles.map((i) => (
+            <th role="columnheader" key={i.id}>
+              {i.component}
             </th>
           ))}
         </tr>

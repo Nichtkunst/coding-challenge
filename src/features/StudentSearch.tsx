@@ -2,7 +2,7 @@ import * as React from "react";
 import { useObserver } from "mobx-react";
 import { Label, Select, Box, Input } from "theme-ui";
 
-import { useStore } from "../store";
+import { SortOrder, useStore } from "../store";
 import { TKlasse } from "../TStudent";
 
 const StudentSearch = () => {
@@ -46,10 +46,10 @@ const StudentSearch = () => {
           id="alter"
           name="alter"
           onChange={(e: any) => {
-            if (e.target.value === "absteigend") {
-              store.sortByAgeDesc();
-            } else if (e.target.value === "aufsteigend") {
-              store.sortByAgeAsc();
+            if (SortOrder.sortByAgeDesc) {
+              store.setOrder(e.target.value);
+            } else if (SortOrder.sortByAgeAsc) {
+              store.setOrder(e.target.value);
             } else {
               return;
             }
@@ -58,10 +58,10 @@ const StudentSearch = () => {
           <option key="1" value="" disabled selected>
             Bitte auswählen...
           </option>
-          <option key="2" value="absteigend">
+          <option key="2" value={SortOrder.sortByAgeDesc}>
             absteigend
           </option>
-          <option key="3" value="aufsteigend">
+          <option key="3" value={SortOrder.sortByAgeAsc}>
             aufsteigend
           </option>
         </Select>

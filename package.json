@@ -6,8 +6,6 @@
   "main": "src/index.tsx",
   "dependencies": {
     "@emotion/core": "10.0.35",
-    "@rebass/forms": "4.0.6",
-    "@rebass/preset": "4.0.5",
     "@types/theme-ui": "0.3.6",
     "emotion-theming": "10.0.27",
     "mobx": "5.15.7",

@@ -1,11 +1,10 @@
 import * as React from "react";
 import { useObserver } from "mobx-react";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { Button, Text } from "theme-ui";
+import { Text } from "theme-ui";
 
-import { useStore } from "../store";
 import { TStudent } from "../TStudent";
 import StudentModal from "./StudentModal";
+import StudentActions from "./StudentActions";
 import { calculateAge } from "../helpers/ageHelper";
 
 type RowStudentTableProps = {
@@ -14,7 +13,6 @@ type RowStudentTableProps = {
 
 // finally I get it
 const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
-  const store = useStore();
   const [toggle, setToggle] = React.useState<boolean>(false);
 
   return useObserver(() => (
@@ -30,16 +28,10 @@ const RowStudentTable: React.FC<RowStudentTableProps> = ({ student }) => {
           <Text>{student.klasse}</Text>
         </td>
         <td role="cell">
-          <Button
-            mr={2}
-            variant="secondary"
-            onClick={() => store.deleteStudent(student.id)}
-          >
-            <AiOutlineDelete />
-          </Button>
-          <Button variant="secondary" onClick={() => setToggle(!toggle)}>
-            <AiOutlineEdit />
-          </Button>
+          <StudentActions
+            studentId={student.id}
+            setToggle={() => setToggle(!toggle)}
+          />
         </td>
       </tr>
       {toggle && (

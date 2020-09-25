@@ -7,13 +7,22 @@ import { mockedKlasseList } from "./mockedData";
 import { TStudent } from "./TStudent";
 import { calculateAge } from "./helpers/ageHelper";
 
+enum SortOrder {
+  "sortByAgeAsc" = "sortByAgeAsc",
+  "sortByAgeDesc" = "sortByAgeDesc",
+  "sortByNameAsc" = "sortByNameAsc",
+  "sortByNameDesc" = "sortByNameDesc",
+  "sortByKlasseAsc" = "sortByKlasseAsc",
+  "sortByKlasseDesc" = "sortByKlasseeDesc"
+}
+
 const createStore = () => {
   // note the use of this which refers to observable instance of the store
   return {
     query: observable.box(""),
-    klasse: observable.box(""), // ?? hmm
-    toggle: Boolean,
-    students: [] as TStudent[], //mockedStudentList,
+    klasse: observable.box(""),
+    order: observable.box(""),
+    students: [] as TStudent[],
     klassen: mockedKlasseList,
     addStudentV(student: TStudent) {
       this.students.push(student);
@@ -30,44 +39,62 @@ const createStore = () => {
     setKlasse(klasse: string) {
       this.klasse.set(klasse);
     },
-    // 1 list for fitered items
+    setOrder(order: string) {
+      this.order.set(order);
+    },
+    // filterLogic
     // @ts-ignore
     get filteredStudents() {
-      return this.students.filter(
-        (i: TStudent) =>
-          // @ts-ignore
-          i.name.toLowerCase().includes(this.query.get()) &&
-          i.klasse.includes(this.klasse.get())
-      );
-    },
-    // abfsteigend
-    sortByAgeDesc() {
-      // @ts-ignore
-      this.students.replace(
-        this.students.slice().sort((studentA: TStudent, studentB: TStudent) => {
+      const copyArray = this.students;
+      console.log("what is th order", this.order.get());
+      if (this.query.get() || this.klasse.get()) {
+        return copyArray.filter(
+          (i: TStudent) =>
+            // @ts-ignore
+            i.name.toLowerCase().includes(this.query.get()) &&
+            i.klasse.includes(this.klasse.get())
+        );
+      } else if (this.order.get() === SortOrder.sortByAgeAsc) {
+        const result = this.students.slice();
+        return result.sort((studentA: TStudent, studentB: TStudent) => {
           return (
             calculateAge(studentA.birthdate) - calculateAge(studentB.birthdate)
           );
-        })
-      );
-    },
-    // aufsteigend
-    sortByAgeAsc() {
-      // @ts-ignore
-      this.students.replace(
-        this.students.slice().sort((studentA: TStudent, studentB: TStudent) => {
+        });
+      } else if (this.order.get() === SortOrder.sortByAgeDesc) {
+        const result = this.students.slice();
+        return result.sort((studentA: TStudent, studentB: TStudent) => {
           return (
             calculateAge(studentB.birthdate) - calculateAge(studentA.birthdate)
           );
-        })
-      );
+        });
+      } else if (this.order.get() === SortOrder.sortByNameAsc) {
+        const result = this.students.slice();
+        return result.sort((studentA: TStudent, studentB: TStudent) =>
+          studentA.name.localeCompare(studentB.name)
+        );
+      } else if (this.order.get() === SortOrder.sortByNameDesc) {
+        const result = this.students.slice();
+        return result.sort((studentA: TStudent, studentB: TStudent) =>
+          studentB.name.localeCompare(studentA.name)
+        );
+      } else if (this.order.get() === SortOrder.sortByKlasseAsc) {
+        const result = this.students.slice();
+        return result.sort((studentA: TStudent, studentB: TStudent) =>
+          studentA.klasse.localeCompare(studentB.klasse)
+        );
+      } else if (this.order.get() === SortOrder.sortByKlasseDesc) {
+        const result = this.students.slice();
+        return result.sort((studentA: TStudent, studentB: TStudent) =>
+          studentB.klasse.localeCompare(studentA.klasse)
+        );
+      } else {
+        return this.students;
+      }
     },
     deleteStudent(id: number) {
       const studentToDelete = this.students.filter((i) => i.id !== id);
       this.students = studentToDelete;
-    },
-    setToggle() {
-      return false;
     }
   };
 };
@@ -95,4 +122,4 @@ const useStore = () => {
   return store;
 };
 
-export { storeContext, StoreProvider, createStore, useStore };
+export { storeContext, StoreProvider, createStore, useStore, SortOrder };
