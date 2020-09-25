@@ -13,10 +13,10 @@ import Students from "./features";
 // Students can be filtered by: Name and Klasse ✅
 // Students can be sorted by each field ASC and DESC
 // * age ✅
-// * TODO: klasse
-// * TODO: name
+// * klasse ✅
+// * name ✅
 
-// flexbox table *TODO ✅ requirements ???
+// flexbox table ✅
 // responsive table ✅
 
 // portal === custom modal window pops up ✅
